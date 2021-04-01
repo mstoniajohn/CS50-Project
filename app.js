@@ -47,15 +47,7 @@ class UI {
 	}
 	// Edit book
 
-	// static editBook(el) {
-	// 	if (el.classList.contains('edit')) {
-	// 		let books = Store.getBooks();
-	// 		// Remove tr from DOM
-	// 		if (el.parentElement.parentElement)
-	// 			document.querySelector('#title').value = book.title;
-	// 		console.log(book);
-	// 	}
-	// }
+	
 
 	static showAlert(message, className, time = 3000) {
 		const div = document.createElement('div');
@@ -165,17 +157,4 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
 	UI.showAlert('Book removed', 'success');
 });
 
-// Event eidt book
-// //==================EVENT Update Book =================//
-// document.querySelector('#book-list').addEventListener('click', (e) => {
-// 	// Prevent the default behaviour of browser
-// 	e.preventDefault();
 
-// 	// Remove book from UI
-// 	UI.editBook(e.target);
-
-// 	//Show succes message
-// 	UI.showAlert('Book updated', 'success');
-// });
-
-// Store.updateBook(book);
