@@ -1,6 +1,6 @@
 // CLASSES WILL USE STATIC METHODS SO THEY CAN BE CALLED DIRECTLY
 
-// Book class: Represents a Book
+//===================BOOK: Represents a Book==================//
 class Book {
 	constructor(author, title, isbn) {
 		this.author = author;
@@ -9,10 +9,16 @@ class Book {
 	}
 }
 
-// UI Class: Handles UI Task
+//===================UI CLASS: Handles UI Task==================//
 class UI {
 	static displayBooks() {
 		const books = Store.getBooks();
+		if (books.length === 0)
+			UI.showAlert(
+				'You do not have any books stored. Please add some :)',
+				'warning',
+				4000
+			);
 		books.forEach((book) => UI.addBookToList(book));
 	}
 
@@ -27,19 +33,31 @@ class UI {
         <td>${book.author}</td>
         <td>${book.isbn}</td>
         <td><a href="" class="btn btn-sm btn-danger delete">X</a></td>
-
+       <!-- <td><a href="" class="btn btn-sm btn-light edit">edit</a></td>-->
         `;
 		// appened row to list of boos=ks
 		list.appendChild(row);
 	}
+	// Delete book
 	static deleteBook(el) {
 		if (el.classList.contains('delete')) {
 			// Remove tr from DOM
 			el.parentElement.parentElement.remove();
 		}
 	}
+	// Edit book
 
-	static showAlert(message, className) {
+	// static editBook(el) {
+	// 	if (el.classList.contains('edit')) {
+	// 		let books = Store.getBooks();
+	// 		// Remove tr from DOM
+	// 		if (el.parentElement.parentElement)
+	// 			document.querySelector('#title').value = book.title;
+	// 		console.log(book);
+	// 	}
+	// }
+
+	static showAlert(message, className, time = 3000) {
 		const div = document.createElement('div');
 
 		// add classes
@@ -51,8 +69,8 @@ class UI {
 		// add before the above the form
 		container.insertBefore(div, form);
 
-		// Remove Alert in 3 seconds
-		setTimeout(() => document.querySelector('.alert').remove(), 3000);
+		// Remove Alert aftfer 3 seconds
+		setTimeout(() => document.querySelector('.alert').remove(), time);
 	}
 
 	static clearFields() {
@@ -62,10 +80,11 @@ class UI {
 	}
 }
 
-// Store Class: Handles Storage in Local Storage
+//===================STORE CLASS: Handles Storage in Local Storage==================//
 class Store {
 	static getBooks() {
 		let books;
+		// Check if any books are available
 		if (localStorage.getItem('books') === null) {
 			books = [];
 		} else {
@@ -74,15 +93,17 @@ class Store {
 		}
 		return books;
 	}
+
+	// Add books
 	static addBook(book) {
 		const books = Store.getBooks();
 		books.push(book);
 		// Make Book Object a string
 		localStorage.setItem('books', JSON.stringify(books));
 	}
+	// Remove book
 	static removeBook(isbn) {
 		const books = Store.getBooks();
-
 		books.forEach((book, index) => {
 			if (book.isbn === isbn) {
 				// splice // remove book from array
@@ -90,18 +111,18 @@ class Store {
 			}
 		});
 		// Reset Local storage with book removed
+		// Books are made strings since local storage stores strings
 		localStorage.setItem('books', JSON.stringify(books));
 	}
 }
 
-// Event Display Book
+//===================EVENT Display Book=================//
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
-// Event Add a Book
+//===================EVENT Add a Book=================//
 document.querySelector('#book-form').addEventListener('submit', (e) => {
 	// Prevent the default behaviour of browser
 	e.preventDefault();
-
 	// get form values
 	const title = document.querySelector('#title').value;
 	const author = document.querySelector('#author').value;
@@ -109,7 +130,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
 	// Validate
 	if (title === '' || isbn === '' || author === '') {
-		UI.showAlert('Please fill out all fields', 'danger');
+		UI.showAlert('Please fill out all fields.', 'danger');
 		//
 	} else {
 		// instantiate book
@@ -118,18 +139,18 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 		// Add Book to UI
 		UI.addBookToList(book);
 
-		// Add book to Local Storage/ Store
+		// Add book to Local Storage/Store
 		Store.addBook(book);
 
 		//Show succes message
-		UI.showAlert('Book added to list', 'success');
+		UI.showAlert('Book added to successfully', 'success');
 
 		// Clear Fields
 		UI.clearFields();
 	}
 });
 
-// Event Remove Book
+//==================EVENT Remove Book =================//
 document.querySelector('#book-list').addEventListener('click', (e) => {
 	// Prevent the default behaviour of browser
 	e.preventDefault();
@@ -143,3 +164,18 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
 	//Show succes message
 	UI.showAlert('Book removed', 'success');
 });
+
+// Event eidt book
+// //==================EVENT Update Book =================//
+// document.querySelector('#book-list').addEventListener('click', (e) => {
+// 	// Prevent the default behaviour of browser
+// 	e.preventDefault();
+
+// 	// Remove book from UI
+// 	UI.editBook(e.target);
+
+// 	//Show succes message
+// 	UI.showAlert('Book updated', 'success');
+// });
+
+// Store.updateBook(book);
