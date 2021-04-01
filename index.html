@@ -4,6 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+		
 		
 		<link
 			rel="stylesheet"
@@ -11,34 +13,50 @@
 			integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 			crossorigin="anonymous"
 		/>
-		<!--ß<link rel="stylesheet" href="styles.css"> -->
-		<title>Document</title>
+		
+		<title>CS50 Final Project</title>
 	</head>
-	<body>
-		<div class="container">
-			<h1 class="display-4 text-center">MyBookList</h1>
-
-			<form id="book-form" class=" my-4">
-			
+	<body class="bg-dark text-light d-flex flex-column justify-content-center position-relative">
+		<!-- Image and text -->
+<nav class="navbar navbar-light bg-light">
+	<a class="navbar-brand" href="/">
+	  
+	  <i class="bi bi-book-fill text-info"></i> My<span class="text-info">Book</span>list <i class="bi bi-book-fill text-info"></i>
+	</a>
+	<ul class="ml-auto list-group-horizontal list-group" >
+		<li class="ml-2">
+			<a class="text-info h4" href="toniaroganti.com"><i class="bi bi-link"></i></a>
+		</li>
+		<li class="ml-2">
+			<a class="text-info h4" href="https://github.com/mstoniajohn"><i class="bi bi-github"></i></a>
+		</li>
+		<li class="ml-2">
+			<a class="text-info h4" href="https://www.linkedin.com/in/tonia-roganti/"><i class="bi bi-linkedin"></i></a>
+		</li>
+	</ul>
+  </nav>
+		<!-- Image and text -->
+		<div class="container my-5 d-flex flex-column justify-content-center">	
+			<h1 class="h3 text-center mb-3">Store Your Booklist Here</h1>
+			<form id="book-form" class="mb-3 ">
                     <div class="form-group">
-                      <label for="title">Title</label>
-                      <input type="text" class="form-control" id="title">
+                      <label for="title" class="sr-only">Title</label>
+                      <input type="text" class="form-control" id="title" autocomplete="off" placeholder="Title">
                       
                     </div>
                     <div class="form-group">
-                      <label for="author">Author</label>
-                      <input type="author" class="form-control" id="author">
+                      <label for="author" class="sr-only">Author</label>
+                      <input type="author" class="form-control" id="author" autocomplete="off" placeholder="Author">
                     </div>
                     <div class="form-group">
-                        <label for="isbn">Isbn#</label>
-                        <input type="isbn" class="form-control" id="isbn">
+                        <label for="isbn" class="sr-only">ISBN#</label>
+                        <input type="isbn" class="form-control " id="isbn" autocomplete="off" placeholder="ISBN#">
                       </div>
                     
-                  
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-info w-100 font-weight-bold mt-2">Submit</button>
                  
 			</form>
-			<table class="table table-striped table-bordered">
+			<table class="table table-striped table-hover table-light table-bordered table-sm-responsive my-5">
                 <thead>
                     <tr>
                       
@@ -53,6 +71,9 @@
 				</th>
 				<tbody id="book-list"></tbody>
 			</table>
+			<div class="text-center font-weight-bold" style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%);">
+				<p><a class="text-info h6" href="toniaroganti.com">Tonia Roganti <i class="bi bi-link h6"></i></a> CS50 Final Project</p>
+			</div>
 		</div>
         <script src="./app.js"></script>
 	</body>
