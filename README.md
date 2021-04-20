@@ -1,5 +1,5 @@
 # Booklist Storage
-## My Final project for CS50
+## [My Final project for CS50](https://distracted-goldwasser-a8fe4f.netlify.app/)
 #### Video Demo:  <https://youtu.be/YAbaKuCEhJo>
 #### Description:
 This Booklist storage app was made with pure vanilla JavaScript and localStorage for storing data.
